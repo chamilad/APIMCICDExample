@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5d7404fd-8c37-4091-a7e6-fca854da0562",
+		"_postman_id": "c03c827e-6f8e-4315-966a-626fb801df5f",
 		"name": "WSO2_API_PUBLISHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -144,7 +144,7 @@
 						"exec": [
 							"var jsonData = JSON.parse(responseBody);",
 							"if (jsonData.count === 1) {",
-							"   postman.setNextRequest(\"Update swagger definition\");",
+							"   postman.setNextRequest(\"Update API\");",
 							"   ",
 							"   postman.setEnvironmentVariable(\"apiStatus\", jsonData.list[0].status); ",
 							"   postman.setEnvironmentVariable(\"apiId\", jsonData.list[0].id);",
@@ -206,6 +206,8 @@
 						"exec": [
 							"var jsonData = JSON.parse(responseBody);",
 							"postman.setEnvironmentVariable(\"apiId\", jsonData.id);",
+							"",
+							"postman.setNextRequest(\"Update swagger definition\");",
 							""
 						],
 						"type": "text/javascript"
@@ -214,6 +216,54 @@
 			],
 			"request": {
 				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"7a2298c4-c905-403f-8fac-38c73401631f\",\n   \"name\": \"{{apiName}}\",\n   \"description\": \"{{apiName}}\",\n   \"context\": \"/{{apiContext}}\",\n   \"version\": \"1.0.0\",\n   \"provider\": \"{{username}}\",\n   \"apiDefinition\":\"{}\",\n   \"wsdlUri\": null,\n   \"responseCaching\": \"Disabled\",\n   \"cacheTimeout\": 300,\n   \"destinationStatsEnabled\": null,\n   \"isDefaultVersion\": false,\n   \"type\": \"HTTP\",\n   \"transport\":    [\n      \"http\",\n      \"https\"\n   ],\n   \"tags\": [\"foo\"],\n   \"tiers\": [\"Unlimited\"],\n   \"maxTps\":    {\n      \"sandbox\": 5000,\n      \"production\": 1000\n   },\n   \"thumbnailUri\": null,\n   \"visibility\": \"PUBLIC\",\n   \"visibleRoles\": [],\n   \"visibleTenants\": [],\n   \"endpointConfig\": \"{\\\"production_endpoints\\\":{\\\"url\\\":\\\"{{backendAPIEndpoint}}\\\",\\\"config\\\":null},\\\"sandbox_endpoints\\\":{\\\"url\\\":\\\"{{backendAPIEndpoint}}\\\",\\\"config\\\":null},\\\"endpoint_type\\\":\\\"http\\\"}\",\n   \"endpointSecurity\":    {\n      \"username\": \"user\",\n      \"type\": \"basic\",\n      \"password\": \"pass\"\n   },\n   \"gatewayEnvironments\": \"Production and Sandbox\",\n   \"sequences\": [],\n   \"subscriptionAvailability\": null,\n   \"subscriptionAvailableTenants\": [],\n   \"businessInformation\":    {\n      \"businessOwnerEmail\": \"{{username}}\",\n      \"technicalOwnerEmail\": \"{{username}}\",\n      \"technicalOwner\": \"{{username}}\",\n      \"businessOwner\": \"{{username}}\"\n   },\n   \"corsConfiguration\":    {\n      \"accessControlAllowOrigins\": [\"*\"],\n      \"accessControlAllowHeaders\":       [\n         \"authorization\",\n         \"Access-Control-Allow-Origin\",\n         \"Content-Type\",\n         \"SOAPAction\"\n      ],\n      \"accessControlAllowMethods\":       [\n         \"GET\",\n         \"PUT\",\n         \"POST\",\n         \"DELETE\",\n         \"PATCH\",\n         \"OPTIONS\"\n      ],\n      \"accessControlAllowCredentials\": false,\n      \"corsConfigurationEnabled\": false\n   }\n}\n"
+				},
+				"url": {
+					"raw": "{{serverURL}}/api/am/publisher/v0.14/apis",
+					"host": [
+						"{{serverURL}}"
+					],
+					"path": [
+						"api",
+						"am",
+						"publisher",
+						"v0.14",
+						"apis"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4c3c1bc8-ae84-4e74-aa3e-568254581894",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"apiId\", jsonData.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -321,7 +371,10 @@
 						"value": "application/json"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "{{serverURL}}/api/am/publisher/v0.14/apis/change-lifecycle?action=Publish&apiId={{apiId}}",
 					"host": [
