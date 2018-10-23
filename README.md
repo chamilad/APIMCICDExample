@@ -7,7 +7,7 @@ This example demonstrate a sample CI/CD pipeline for API Management using [WSO2 
 
 This is implemented based on the [solution](https://github.com/manjulaRathnayaka/API-Management-CI-CD-Example) done by [manjulaRathnayaka](https://github.com/manjulaRathnayaka) for WSO2 API Cloud. Full credits goes to him!.
 
-![](https://lh5.googleusercontent.com/dYoaXQQ7CyLGXjWo6YTZDzCUKQpyevq-UlYbzdFrMYLuSQG1J6A4vFZvc4TvPLqZC-4p_Zg7qlek9oo3wiQEdGlDbCCFj8YQpSlJq0rij5kK-_KhmcF7NzWXrBmeM3F3onw4PGpM)
+![](https://github.com/malinthaprasan/APIMCICDExample/raw/master/Architecture.jpg)
 
   
 # To try out this with your repository
