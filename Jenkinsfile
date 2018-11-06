@@ -6,5 +6,12 @@ pipeline {
         git(url: 'https://github.com/chamilad/APIMCICDExample', branch: 'master')
       }
     }
+    stage('dev_Deploy') {
+      steps {
+        sh '''echo "Start deploying the managed REST API to WSO2 Development Environment"
+/usr/share/node_modules/.bin/newman run DeployAPI/WSO2_API_PUBLISHER.postman_collection.json -e DevEnvironment/Development.postman_environment.json --insecure --bail
+'''
+      }
+    }
   }
 }
