@@ -13,5 +13,14 @@ pipeline {
 '''
       }
     }
+    stage('dev_Test') {
+      steps {
+        sh '''
+echo "Start testing the REST API in WSO2 Development Environment";
+
+
+/usr/share/node_modules/.bin/newman run TestAPI/TestAPI.postman_collection.json -e DevEnvironment/Development.postman_environment.json --insecure --bail'''
+      }
+    }
   }
 }
